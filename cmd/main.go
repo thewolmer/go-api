@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/thewolmer/go-api/config"
+	"github.com/thewolmer/go-api/controllers"
+)
+
+func init() {
+	config.LoadEnv()
+	config.ConnectDB()
+}
 
 func main() {
-	fmt.Println("Hello world")
+	r := gin.Default()
+	r.POST("/posts", controllers.PostCreate)
+	r.Run()
 }
